@@ -1,7 +1,12 @@
 ThriftJsonRebuilder
 ==
-
+![License](https://img.shields.io/github/license/zzkzzk1996/Thrift-Json-Rebuilder) 
+![Last Commit](https://img.shields.io/github/last-commit/zzkzzk1996/Thrift-Json-Rebuilder)
+![Language](https://img.shields.io/github/languages/top/zzkzzk1996/Thrift-Json-Rebuilder)
 > Human Readable JSON To Thrift POJO「_Base Apache Thrift 0.9.2_」
+
+## Contributors
+- [zzkzzk1996](https://github.com/zzkzzk1996)
 
 ## 一、痛点
 - 目前涉及 _Thrift POJO_ 和 _JSON_ 转化的 `Apache Thrift` 原生 `Protocol` 只有两种：`TSimpleJSONProtocol` 和 `TJSONProtocol`
@@ -16,7 +21,7 @@ ThriftJsonRebuilder
 ### 2.2 具体实现思路
 
 - 基于痛点的问题，最终考虑通过把 `TSimpleJsonProtocol` 生成的 _Human Readable JSON_ 进行 `Rebuild` 处理成` TJSONProtocol` 支持的形式完成 _JSON_ 到 _Thrift POJO_ 的转换
-- ![IMG](https://github.com/zzkzzk1996/Thrift-Json-Rebuilder/blob/main/src/main/resources/img.png) <br>
+- ![IMG](https://github.com/zzkzzk1996/Thrift-Json-Rebuilder/blob/main/src/main/resources/img.png) 
 - 具体设计思路如上图，结合 _Thrift POJO_ 和 _JSON_ 中的信息，提取出字段的 **名称**、**类型**、**ID**、**Size** 等信息
     0. 使用 `Gson` 的 `JsonReader` 读取输入 _JSON_
     1. 利用 _JSON_ 中字段 _Name_ 通过递归反射的方式来获取到 _Thrift POJO Class_ 中的 **Type**、**ID** 等信息
