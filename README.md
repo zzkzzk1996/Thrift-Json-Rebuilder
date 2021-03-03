@@ -8,6 +8,7 @@ ThriftJsonRebuilder
 ## Contributors
 - [zzkzzk1996](https://github.com/zzkzzk1996)
 - [Caojianfa](https://github.com/Caojianfa)
+- [yimuliancheng](https://github.com/yimuliancheng)
 
 ## 一、痛点
 - 目前涉及 _Thrift POJO_ 和 _JSON_ 转化的 `Apache Thrift` 原生 `Protocol` 只有两种：`TSimpleJSONProtocol` 和 `TJSONProtocol`
@@ -22,12 +23,12 @@ ThriftJsonRebuilder
 ### 2.2 具体实现思路
 
 - 基于痛点的问题，最终考虑通过把 `TSimpleJsonProtocol` 生成的 _Human Readable JSON_ 进行 `Rebuild` 处理成` TJSONProtocol` 支持的形式完成 _JSON_ 到 _Thrift POJO_ 的转换
-- ![IMG](https://github.com/zzkzzk1996/Thrift-Json-Rebuilder/blob/main/src/main/resources/img.png) 
+![IMG](https://github.com/zzkzzk1996/Thrift-Json-Rebuilder/blob/main/src/main/resources/img.png) 
 - 具体设计思路如上图，结合 _Thrift POJO_ 和 _JSON_ 中的信息，提取出字段的 **名称**、**类型**、**ID**、**Size** 等信息
-    0. 使用 `Gson` 的 `JsonReader` 读取输入 _JSON_
-    1. 利用 _JSON_ 中字段 _Name_ 通过递归反射的方式来获取到 _Thrift POJO Class_ 中的 **Type**、**ID** 等信息
-    2. 同时通过遍历 _JSON_ 的方式来获取到 **Size** 信息
-    3. 将两部分信息组合到临时的数据结构 `ThriftMeta` 中，动态生成 `TJSONProtocol` 能够处理的 _JSON_，完成反序列化
+    1. 使用 `Gson` 的 `JsonReader` 读取输入 _JSON_
+    2. 利用 _JSON_ 中字段 _Name_ 通过递归反射的方式来获取到 _Thrift POJO Class_ 中的 **Type**、**ID** 等信息
+    3. 同时通过遍历 _JSON_ 的方式来获取到 **Size** 信息
+    4. 将两部分信息组合到临时的数据结构 `ThriftMeta` 中，动态生成 `TJSONProtocol` 能够处理的 _JSON_，完成反序列化
 
 ### 2.3 其他处理
 >由于 `TSimpleJsonProtocol` 在序列化 `binary` 类型的字段的时候是直接采用了 `toString` 方法，而 `TJsonProtocol` 在序列化 `binary` 类型的字段的时候则是使用了 `Base64` 编码，经过 `Rebuild` 处理会导致 `binary` 字段不可用的问题
