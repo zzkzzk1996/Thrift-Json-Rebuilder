@@ -7,6 +7,7 @@ ThriftJsonRebuilder
 
 ## Contributors
 - [zzkzzk1996](https://github.com/zzkzzk1996)
+- [Caojianfa](https://github.com/Caojianfa)
 
 ## 一、痛点
 - 目前涉及 _Thrift POJO_ 和 _JSON_ 转化的 `Apache Thrift` 原生 `Protocol` 只有两种：`TSimpleJSONProtocol` 和 `TJSONProtocol`
